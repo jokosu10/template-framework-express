@@ -12,9 +12,9 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 //require all the routes
-var IndexRouter = require("../routes/Index");
+let IndexRouter = require("../routes/Index");
 
-var server = express();
+let server = express();
 
 // configure app to use bodyParser
 server.use(bodyParser.json());
