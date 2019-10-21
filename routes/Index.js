@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express();
 
-const indexRouter = require('../controllers/IndexController');
+const IndexRouter = require('../controllers/IndexController');
 
-router.get('/test', indexRouter.index);
-router.get('/jokosu10', indexRouter.joko);
+router.get('/api/test', IndexRouter.index);
+router.get('/api/jokosu10', IndexRouter.joko);
 
 module.exports = router;
