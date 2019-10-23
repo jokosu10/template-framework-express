@@ -27,6 +27,17 @@ Step by step for use this template to workspace.
 5. set variable in .env
 ```
 
+## Running the apps
+If you installed nodemon in global workspace, run this apps with command
+```
+nodemon app.js
+```
+If you want to run apps with docker, run this apps with command
+```
+1. docker build -t <username>/template-node-app .
+2. docker run -p 49160:4000 -d <username>/template-node-app
+```
+
 ## Running the tests
 
 Run the automated tests for this system with command
