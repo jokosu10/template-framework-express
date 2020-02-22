@@ -7,12 +7,13 @@ const headerParser = require("header-parser");
 const helmet = require("helmet");
 const cors = require("cors");
 const passport = require("passport");
+const morgan = require('morgan');
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 //require all the routes
-let IndexRouter = require("../routes/Index");
+let IndexRouter = require("../routes/IndexRoute");
 
 let server = express();
 
@@ -22,6 +23,7 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
+server.use(morgan('tiny'));
 server.use(cookieParser());
 server.use(helmet());
 server.use(cors());
@@ -40,14 +42,6 @@ server.use((req, res, next) => {
 
 //prefix all the routes
 server.use(IndexRouter);
-
-/**
- * error response sending helper
- */
-const sendErrorResponse = (res, msg) => {
-    res.statusCode = 500;
-    res.end(msg);
-};
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {
