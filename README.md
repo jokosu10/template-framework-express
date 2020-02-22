@@ -28,7 +28,7 @@ Step by step for use this template to workspace.
 ```
 
 ## Running the apps
-If you installed nodemon in global workspace, run this apps with command
+Run this apps with command
 ```
 nodemon app.js
 ```
