@@ -4,9 +4,14 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "dbtest": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:create",
-    "tabletest": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
-    "test": "cross-env NODE_ENV=test jest __tests__ --coverage controllers"
+    "db_development": "cross-env NODE_ENV=development ./node_modules/.bin/sequelize db:create",
+    "table_development": "cross-env NODE_ENV=development ./node_modules/.bin/sequelize db:migrate",
+    "seed_development": "cross-env NODE_ENV=development ./node_modules/.bin/sequelize db:seed:all",
+    "migrate": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:migrate && cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:seed:all",
+    "migrate:reset": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:migrate:undo:all && npm run migrate",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
+    "test": "cross-env NODE_ENV=test jest __tests__ --coverage controllers",
+    "dev": "./node_modules/.bin/nodemon app.js"
   },
   "jest": {
     "testEnvironment": "node",
@@ -20,31 +25,30 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.0",
+    "cross-env": "^7.0.2",
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
-    "geo-nearby": "^2.0.1",
     "header-parser": "^1.0.0",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pg": "^7.12.1",
+    "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.1",
+    "sequelize": "^5.21.6",
     "sequelize-cli": "^5.5.1",
-    "swagger-jsdoc": "^3.4.0",
-    "swagger-ui-express": "^4.1.2"
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "jest": "^24.9.0",
-    "jest-cli": "^24.9.0",
-    "morgan": "^1.9.1",
+    "@types/jest": "^25.2.1",
+    "jest": "^25.2.7",
+    "jest-cli": "^25.2.7",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
   }
