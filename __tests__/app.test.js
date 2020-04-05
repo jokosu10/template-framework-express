@@ -1,24 +1,26 @@
-const request = require('supertest');
-const app = require('../servers/Index');
+const request = require("supertest");
+const app = require("../servers/Index");
 
-describe('Test /', () => {
+describe("Test /", () => {
+  test("should return 200", async (done) => {
+    const response = await request(app)
+      .get("/api/test")
+      .set("Accept", "application/json")
+      .expect(200);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message");
+    expect(response.body.message).toContain("Hello World!");
+    done();
+  });
 
-    test('should return 200', async (done) => {
-        const response = await request(app).get('/api/test');
-        expect(response.status).toEqual(200);
-        expect(response.text).toContain('Hello World!');
-        done();
-    });
-
-    test('should return test api', async (done) => {
-        const response = await request(app).get('/api/jokosu10');
-        expect(response.status).toEqual(200);
-        expect(response.body).toHaveProperty('message');
-        expect({
-            message: "Joko Susilo Ganteng"
-        }).toMatchObject({
-            message: "Joko Susilo Ganteng"
-        });
-        done();
-    });
+  test("should return test api", async (done) => {
+    const response = await request(app)
+      .get("/api/jokosu10")
+      .set("Accept", "application/json")
+      .expect(200);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message");
+    expect(response.body.message).toContain("Joko Susilo Ganteng");
+    done();
+  });
 });
