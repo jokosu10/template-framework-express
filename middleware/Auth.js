@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 // Middleware to generate a token
 function generateToken(user) {
 	// Generate a token
-	const token = jwt.sign({ userId: user.id }, process.env.TOKEN_KEY, { expiresIn: '2h' });
+	const token = jwt.sign({ user_id: user.id }, process.env.TOKEN_KEY, { expiresIn: '2h' });
 	return token;
 }
 
+// Middleware to check token manually
 function checkToken(token) {
 
 	if (!token || !token.startsWith('Bearer ')) {
