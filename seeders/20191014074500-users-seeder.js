@@ -1,5 +1,6 @@
 'use strict';
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -13,11 +14,15 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+    const uuid = uuidv4();
+    const email = "jokosu10@opensuse.org";
+
     return queryInterface.bulkInsert(
       "users",
       [{
-        username: "joko",
-        email: "jokosu10@opensuse.org",
+        id: uuid,
+        username: "jokosu10",
+        email: email,
         password: bcrypt.hashSync('1234567890', 10),
         created_at: new Date(),
         updated_at: new Date()
