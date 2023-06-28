@@ -5,10 +5,10 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-let config = require("../configs/config.js")[env];
+const config = require("../configs/config.js")[env];
 const db = {};
 
-let sequelize;
+var sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -42,6 +42,5 @@ db.Sequelize = Sequelize;
 const userModel = require('./UserModel.js')(sequelize);
 
 db[userModel.name] = userModel;
-
 
 module.exports = db;
