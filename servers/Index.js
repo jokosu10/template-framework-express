@@ -6,7 +6,8 @@ const headerParser = require("header-parser");
 
 const helmet = require("helmet");
 const cors = require("cors");
-const passport = require("passport");
+const passport = require('passport');
+require('../services/Passport');
 const morgan = require('morgan');
 
 const swaggerJSDoc = require('swagger-jsdoc');
@@ -46,9 +47,9 @@ server.use(IndexRouter);
 server.use(UserRouter);
 
 // error handling
-app.use((err, req, res, next) => {
+server.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json({ message: "Something broke!" });
 });
 
 module.exports = server;

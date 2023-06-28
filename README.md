@@ -1,5 +1,7 @@
 # Structure Template NodeJS
 
+generate token string : node helpers/RandomString.js
+
 The structure template NodeJS.
 
 ## Getting Started
