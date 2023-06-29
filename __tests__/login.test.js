@@ -46,4 +46,73 @@ describe('POST /login', () => {
 			expect(error).toBe(error);
 		}
 	});
+
+	it('should respond with a erorr message jwt when access protected route', async () => {
+		try {
+			// Make a GET request to the protected route without the token
+			const response = await request(app)
+				.get('/api/jokosu10')
+				.set("Accept", "application/json")
+				.expect(401);
+
+			expect(response.status).toBe(401);
+
+			expect(response.body).toMatchObject({
+				status: expect.any(String),
+				code: expect.any(Number),
+				message: expect.any(String)
+			});
+
+		} catch (error) {
+			expect(error).toBe(error);
+		}
+	});
+
+	it('should respond with a message for authenticated users', async () => {
+		const mockUser = { id: 1, name: 'John Doe' };
+
+		try {
+			// Generate a test token
+			const testToken = jwt.sign({ user: mockUser }, process.env.TOKEN_KEY, { expiresIn: '1h' });
+
+			// Make a GET request to the route with the token
+			const response = await request(app)
+				.get('/api/jokosu10')
+				.set("Accept", "application/json")
+				.set('Authorization', `Bearer ${testToken}`)
+				.expect(200);
+
+			expect(response.status).toBe(200);
+
+			expect(response.body).toMatchObject({
+				status: expect.any(String),
+				code: expect.any(Number),
+				message: expect.any(String)
+			});
+
+		} catch (error) {
+			expect(error).toBe(error);
+		}
+	});
+
+	it('should respond with a message for public users', async () => {
+		try {
+			//  Make a GET request to the public route without token
+			const response = await request(app)
+				.get('/api/test')
+				.set("Accept", "application/json")
+				.expect(200);
+
+			expect(response.status).toBe(200);
+
+			expect(response.body).toMatchObject({
+				status: expect.any(String),
+				code: expect.any(Number),
+				message: expect.any(String)
+			});
+
+		} catch (error) {
+			expect(error).toBe(error);
+		}
+	});
 });
