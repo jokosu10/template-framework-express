@@ -1,61 +1,63 @@
-# Structure Template NodeJS
+# Template Express.js
 
-generate token string : node helpers/RandomString.js
+The structure template Express.js. The template in is intended for anyone who needs guidance to make their Express.js project more tidy and structured or anyone who is trying Express.js for the first time.
 
-The structure template NodeJS.
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)
 
+## Table of Contents
+
+- [Template Express.js](#template-expressjs)
+	- [Table of Contents](#table-of-contents)
+	- [Getting Started](#getting-started)
+		- [Prerequisites](#prerequisites)
+		- [Installation](#installation)
+		- [Environment Variables](#environment-variables)
+	- [How to start for initial development process](#how-to-start-for-initial-development-process)
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-Make sure you install this in your workspace.
+What things you need to install the software and how to install them.
 
-```
-1. NodeJS LTS Version (recommended v10.15.x)
-2. NPM (recommended v6.9.x)
-2. Git (recommended v2.22.x)
-```
+- [Node.js](https://nodejs.org/en/download/)
+- [npm](https://www.npmjs.com/get-npm)
 
-### Installing
+### Installation
 
-Step by step for use this template to workspace.
-```
-1. git clone https://github.com/jokosu10/template-framework-express.git
-2. cd template-framework-express
-3. npm install
-4. cp .env.example .env
-5. set variable in .env
-```
+A step-by-step guide on setting up the project locally. 
 
-## Running the apps
-Run this apps with command
-```
-nodemon app.js
-```
-If you want to run apps with docker, run this apps with command
-```
-1. docker build -t <username>/template-node-app .
-2. docker run -p 49160:4000 -d <username>/template-node-app
-```
+1. Clone the repository:
 
-## Running the tests
+    ```bash
+    git clone https://github.com/jokosu10/template-framework-express.git
+    ```
 
-Run the automated tests for this system with command
-```
-npm run test
-```
+2. Navigate into the directory: 
 
-## Built With
+    ```bash
+    cd template-framework-express
+    ```
 
-* [Express JS](https://expressjs.com/) - The web framework used
-* [NPM](https://www.npmjs.com/) - Dependency Management
+3. Install the dependencies:
 
-## Authors
+    ```bash
+    npm install
+    ```
 
-* **Joko Susilo < jokosu10@opensuse.org >**
+### Environment Variables
 
-## License
+1. Copy the `.env.example` file and create a new file called `.env`:
 
-This project is licensed under the MIT License.
+	```bash
+	cp .env.example .env
+	```
+
+## How to start for initial development process
+
+1. Copy the `.env.example` file and create a new file called `.env`:
+
+	```bash
+	cp .env.example .env
+	```
