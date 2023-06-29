@@ -46,10 +46,15 @@ server.use((req, res, next) => {
 server.use(IndexRouter);
 server.use(UserRouter);
 
-// error handling
+// error handler to spesific message
 server.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: "Something broke!" });
-});
+    var statusCode = res.status(err.status || 500);
+    res.status(statusCode).json({
+        status: "erorr",
+        code: statusCode,
+        message: err.message
+    });
+})
 
 module.exports = server;
