@@ -13,6 +13,7 @@ The structure template Express.js. The template in is intended for anyone who ne
 		- [Installation](#installation)
 		- [Environment Variables](#environment-variables)
 	- [How to start for initial development process](#how-to-start-for-initial-development-process)
+		- [Running server development](#running-server-development)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -56,6 +57,9 @@ A step-by-step guide on setting up the project locally.
 
 ## How to start for initial development process
 
+A step-by-step guide on setup intial data for first time
+
+### Running server development
 1. Copy the `.env.example` file and create a new file called `.env`:
 
 	```bash
