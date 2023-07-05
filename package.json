@@ -12,7 +12,7 @@
     "db_create_testing": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:create",
     "migrate:testing": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:migrate && cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:seed:all",
     "migrate:testing:reset": "cross-env NODE_ENV=test ./node_modules/.bin/sequelize db:migrate:undo:all",
-    "testing": "jest __tests__ --detectOpenHandles",
+    "testing": "cross-env NODE_ENV=test jest __tests__ --detectOpenHandles",
     "dev": "./node_modules/.bin/nodemon app.js"
   },
   "jest": {
@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
-    "jest": "^29.5.0",
-    "jest-cli": "^29.5.0",
+    "jest": "^29.6.0",
+    "jest-cli": "^29.6.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "supertest": "^6.3.3"

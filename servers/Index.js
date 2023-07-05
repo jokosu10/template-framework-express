@@ -7,8 +7,10 @@ const headerParser = require("header-parser");
 const helmet = require("helmet");
 const cors = require("cors");
 const passport = require('passport');
-require('../services/Passport');
 const morgan = require('morgan');
+const { Sequelize } = require('sequelize');
+
+require('../services/Passport');
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -19,7 +21,7 @@ var UserRouter = require("../routes/UserRoute");
 
 const server = express();
 
-// configure app to use bodyParser
+// load all this module
 server.use(bodyParser.json());
 server.use(express.json());
 server.use(express.urlencoded({
@@ -46,15 +48,22 @@ server.use((req, res, next) => {
 server.use(IndexRouter);
 server.use(UserRouter);
 
-// error handler to spesific message
-server.use((err, req, res, next) => {
-    console.error(err.stack);
-    var statusCode = res.status(err.status || 500);
-    res.status(statusCode).json({
-        status: "erorr",
-        code: statusCode,
-        message: err.message
-    });
-})
+// catch 404 and forward to error handler
+server.use(function (req, res, next) {
+    next(createError(404));
+});
+
+// error handler
+server.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // send the error page
+    res.status(err.status || 500);
+    res.json({ message: res.locals.message });
+
+    next();
+});
 
 module.exports = server;
