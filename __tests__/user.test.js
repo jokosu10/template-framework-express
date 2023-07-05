@@ -1,10 +1,23 @@
 const request = require('supertest');
 const app = require("../servers/Index");
 const jwt = require('jsonwebtoken');
+const db = require('../models/Index');
+
 require("dotenv").config();
 
-describe('POST /login', () => {
-	it('should respond with a JWT on successful login', async () => {
+beforeAll(async () => {
+	// do something before all tests
+	await db.sequelize.sync();
+});
+
+afterAll(async () => {
+	// close the Sequelize connection after all tests
+	jest.setTimeout(10000);
+	await db.sequelize.close();
+});
+
+describe('unit testing for endpoint users', () => {
+	it('should return a response with a success message when successful login', async () => {
 
 		const email = "jokosu10@opensuse.org";
 		const password = "1234567890";
@@ -47,7 +60,31 @@ describe('POST /login', () => {
 		}
 	});
 
-	it('should respond with a erorr message jwt when access protected route', async () => {
+	it('should return a response with a error message because token is expired / token invalid', async () => {
+		const mockUser = { id: 1, name: 'John Doe' };
+
+		try {
+			const expiredToken = jwt.sign({ user: mockUser }, process.env.TOKEN_KEY, { expiresIn: '-1s' });
+
+			const response = await request(app)
+				.get('/products')
+				.set("Accept", "application/json")
+				.set('Authorization', `Bearer ${expiredToken}`)
+				.expect(401);
+
+			expect(response.status).toBe(401);
+
+			expect(response.body).toMatchObject({
+				status: expect.any(String),
+				code: expect.any(Number),
+				message: expect.any(String)
+			});
+		} catch (error) {
+			expect(error).toBe(error);
+		}
+	});
+
+	it('should return a response with a error message jwt when access protected route without token', async () => {
 		try {
 			// Make a GET request to the protected route without the token
 			const response = await request(app)
@@ -68,7 +105,7 @@ describe('POST /login', () => {
 		}
 	});
 
-	it('should respond with a message for authenticated users', async () => {
+	it('should return a response with a success message for authenticated users when accessing a protected route', async () => {
 		const mockUser = { id: 1, name: 'John Doe' };
 
 		try {
@@ -95,7 +132,7 @@ describe('POST /login', () => {
 		}
 	});
 
-	it('should respond with a message for public users', async () => {
+	it('should respond with a success message for public route', async () => {
 		try {
 			//  Make a GET request to the public route without token
 			const response = await request(app)

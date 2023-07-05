@@ -5,10 +5,10 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require("../configs/config.js")[env];
+let config = require("../configs/config.js")[env];
 const db = {};
 
-var sequelize;
+let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -19,6 +19,12 @@ if (config.use_env_variable) {
     config
   );
 }
+
+// Test DB connection
+sequelize.authenticate()
+  .then(() => console.log('Database connected... to', config.database, 'with env', process.env.NODE_ENV, 'and dialect', config.dialect))
+  .catch(err => console.error('Error: ', err));
+
 
 fs.readdirSync(__dirname)
   .filter((file) => {
@@ -37,10 +43,5 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-// how to include your model in sequelize
-const userModel = require('./UserModel.js')(sequelize);
-
-db[userModel.name] = userModel;
 
 module.exports = db;
