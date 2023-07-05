@@ -1,6 +1,7 @@
 # for env macbook
 .vscode
 .DS_Store
+.editorconfig
 
 # Logs
 logs
