@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Name must start with a letter, have no spaces, and be at least 3 characters."
         },
         max: {
-          args: 40,
+          args: 100,
           msg: "Name must start with a letter, have no spaces, and be at less than 40 characters."
         },
         is: {

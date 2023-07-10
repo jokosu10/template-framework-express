@@ -18,6 +18,8 @@ const swaggerUi = require('swagger-ui-express');
 //require all the routes
 var IndexRouter = require("../routes/IndexRoute");
 var UserRouter = require("../routes/UserRoute");
+var CategoryRouter = require("../routes/CategoryRoute");
+var ProductRouter = require("../routes/ProductRoute");
 
 const server = express();
 
@@ -47,6 +49,8 @@ server.use((req, res, next) => {
 //prefix all the routes
 server.use(IndexRouter);
 server.use(UserRouter);
+server.use(CategoryRouter);
+server.use(ProductRouter);
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {
