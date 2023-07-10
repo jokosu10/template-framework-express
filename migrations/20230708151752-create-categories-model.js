@@ -1,30 +1,24 @@
 'use strict';
+
 module.exports = {
-  // eslint-disable-next-line
-  up: async (queryInterface, Sequelize) =>
-    await queryInterface.createTable("users", {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('categories', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false
       },
-      username: {
+      name: {
         type: Sequelize.STRING,
         defaultValue: "",
-        allowNull: false,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING,
-        defaultValue: "",
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING,
         allowNull: false,
         required: true
+      },
+      description: {
+        type: Sequelize.TEXT,
+        defaultValue: "",
+        allowNull: true
       },
       created_at: {
         allowNull: true,
@@ -36,8 +30,9 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       }
-    }),
+    });
+  },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('categories');
   }
 };

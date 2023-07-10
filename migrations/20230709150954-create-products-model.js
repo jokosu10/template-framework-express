@@ -2,29 +2,37 @@
 module.exports = {
   // eslint-disable-next-line
   up: async (queryInterface, Sequelize) =>
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable("products", {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false
       },
-      username: {
+      name: {
         type: Sequelize.STRING,
         defaultValue: "",
-        allowNull: false,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING,
-        defaultValue: "",
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING,
         allowNull: false,
         required: true
+      },
+      description: {
+        type: Sequelize.TEXT,
+        defaultValue: "",
+        allowNull: true
+      },
+      price: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        required: true
+      },
+      category_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'categories', // Name of the created table for categories
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       created_at: {
         allowNull: true,
@@ -38,6 +46,6 @@ module.exports = {
       }
     }),
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('products');
   }
 };
