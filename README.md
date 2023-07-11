@@ -29,19 +29,19 @@ What things you need to install the software and how to install them.
 
 A step-by-step guide on setting up the project locally. 
 
-1. Clone the repository:
+1. Clone the repository.
 
     ```bash
     git clone https://github.com/jokosu10/template-framework-express.git
     ```
 
-2. Navigate into the directory: 
+2. Navigate into the directory.
 
     ```bash
     cd template-framework-express
     ```
 
-3. Install the dependencies:
+3. Install the dependencies.
 
     ```bash
     npm install
@@ -54,14 +54,15 @@ A step-by-step guide on setting up the project locally.
 	```bash
 	cp .env.example .env
 	```
+2. Write the all configuration for project in file `.env`.
 
 ## How to start for initial development process
 
-A step-by-step guide on setup intial data for first time
+A step-by-step guide on setup initial data for first time.
 
 ### Running server development
-1. Copy the `.env.example` file and create a new file called `.env`:
+1. Running for application using development environment.
 
 	```bash
-	cp .env.example .env
+	npm run dev
 	```
